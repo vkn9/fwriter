@@ -2,8 +2,6 @@ import { createChildElement, detectSelector, initChildElement } from './utils/co
 import { heading } from './enum/core';
 import {objMenuEditor, objBtn, ObjHeading} from './enum/element';
 
-console.log(ObjHeading)
-
 window.fWrite = (seletor, obj) => {
   const editor = detectSelector(seletor);
   const menuEditor = createChildElement(editor, objMenuEditor);

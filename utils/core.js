@@ -37,14 +37,14 @@ function createElement(parent, obj) {
 }
 
 export function createChildElement(parent, data) {
-  // Tao nhieu element
+  // Create many element
   if (Array.isArray(data)) {
     for (let i = 0; i < data.length; i++) {
       const element = data[i];
       createElement(parent, element)
     }
   }
-  // Tao mot element
+  // Create single element
   return createElement(parent, data);
 }
 
@@ -58,7 +58,7 @@ export function detectSelector(selector) {
     default:
       const onlyLowercase = /^[a-z]+$/;
       if (onlyLowercase.test(firstChar)) {
-        return document.getElementsByTagName(selector);
+        return document.getElementsByTagName(selector)[0];
       }
   }
 }
@@ -68,6 +68,7 @@ export function initChildElement(obj, count) {
   for (let i = 0; i < count; i++) {
     if (!obj.child[i]) obj.child[i] = {};
     if (!obj.child[i].prop) obj.child[i].prop = {};
+    
     if (!obj.child[i].prop.attribute) obj.child[i].prop.attribute = [];
     if (!obj.child[i].prop.dataset) obj.child[i].prop.dataset = [];
   }

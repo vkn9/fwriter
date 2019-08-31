@@ -1,3 +1,13 @@
+import {
+  bold,
+  underLine,
+  insertImage,
+  justifyLeft,
+  justifyCenter,
+  justifyRight
+} from './../enum/element';
+import { blockLevel } from './../modules/block_level';
+
 function addProp(obj, element) {
   Object.keys(obj).forEach(key => {
     const objOfKey = obj[key];
@@ -41,7 +51,7 @@ export function createChildElement(parent, data) {
   if (Array.isArray(data)) {
     for (let i = 0; i < data.length; i++) {
       const element = data[i];
-      createElement(parent, element)
+      createElement(parent, element);
     }
   }
   // Create single element
@@ -64,13 +74,55 @@ export function detectSelector(selector) {
 }
 
 export function initChildElement(obj, count) {
-  if (!obj.child) obj.child = []
+  if (!obj.child) obj.child = [];
   for (let i = 0; i < count; i++) {
     if (!obj.child[i]) obj.child[i] = {};
     if (!obj.child[i].prop) obj.child[i].prop = {};
-    
+
     if (!obj.child[i].prop.attribute) obj.child[i].prop.attribute = [];
     if (!obj.child[i].prop.dataset) obj.child[i].prop.dataset = [];
   }
   return obj;
+}
+
+export function initButton(obj) {
+  const buttonDefault = [
+    bold,
+    underLine,
+    insertImage,
+    justifyLeft,
+    justifyCenter,
+    justifyRight,
+    blockLevel
+  ];
+  let objBtn = [];
+  if (!obj || !obj.button || obj.button.length === 0) return buttonDefault;
+  const listButton = obj.button;
+  for (let i = 0; i < listButton.length; i++) {
+    const element = listButton[i];
+    switch (element) {
+      case 'bold':
+        objBtn.push(bold);
+        break;
+      case 'underLine':
+        objBtn.push(underLine);
+        break;
+      case 'insertImage':
+        objBtn.push(insertImage);
+        break;
+      case 'justifyLeft':
+        objBtn.push(justifyLeft);
+        break;
+      case 'justifyCenter':
+        objBtn.push(justifyCenter);
+        break;
+      case 'justifyRight':
+        objBtn.push(justifyRight);
+        break;
+      case 'blockLevel':
+        objBtn.push(blockLevel);
+        break;
+    }
+  }
+  return objBtn;
 }

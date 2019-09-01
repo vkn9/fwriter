@@ -9,12 +9,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
     />
+    <!-- <style>
+      #editor {
+        width: 1000px;
+        margin: 0 auto;
+      }
+    </style> -->
   </head>
   <body>
-    <div class="editor"></div>
+    <div id="editor"></div>
     <script src="dist/bundle.js"></script>
     <script>
-      fWrite('div', {
+      fWrite('#editor', {
         button: []
       });
     </script>

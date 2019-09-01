@@ -4,10 +4,12 @@ import {
   insertImage,
   justifyLeft,
   justifyCenter,
-  justifyRight
+  justifyRight,
+  foreColor
 } from './../enum/element';
 import { blockLevel } from './../modules/block_level';
-
+import { fontName } from './../modules/font_name';
+import { fontSize } from './../modules/font_size';
 function addProp(obj, element) {
   Object.keys(obj).forEach(key => {
     const objOfKey = obj[key];
@@ -93,7 +95,10 @@ export function initButton(obj) {
     justifyLeft,
     justifyCenter,
     justifyRight,
-    blockLevel
+    blockLevel,
+    fontName,
+    fontSize,
+    foreColor
   ];
   let objBtn = [];
   if (!obj || !obj.button || obj.button.length === 0) return buttonDefault;
@@ -122,7 +127,47 @@ export function initButton(obj) {
       case 'blockLevel':
         objBtn.push(blockLevel);
         break;
+      case 'fontName':
+        objBtn.push(fontName);
+        break;
+      case 'fontSize':
+        objBtn.push(fontSize);
+        break;
     }
   }
   return objBtn;
 }
+
+export function execCommand(selector, obj) {
+  if (!obj || obj.length === 0) return false;
+  for (let i = 0; i < obj.length; i++) {
+    const element = obj[i];
+    const listTarget = selector.querySelectorAll(element[0]);
+    listTarget.forEach(el => {
+      switch (element[1]) {
+        case 'button':
+          el.addEventListener('click', () => {
+            const formatText = el.dataset.cmd;
+            if (formatText === 'insertimage') {
+              const image = prompt('image');
+              document.execCommand(formatText, true, image);
+            } else {
+              document.execCommand(formatText, true);
+            }
+          });
+          break;
+        case 'select':
+          el.addEventListener('change', () => {
+            const value = el.options[el.selectedIndex].value;
+            document.execCommand(el.dataset.cmd, false, value);
+          });
+        case 'input':
+          el.addEventListener('change', () => {
+            document.execCommand(el.dataset.cmd, false, el.value);
+          });
+      }
+    });
+  }
+}
+
+export function execCommandSelect() {}

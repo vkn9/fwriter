@@ -1,0 +1,42 @@
+.fwt-editor {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+.fwt-menu {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000000;
+}
+
+.fwt-button,
+.fwt-select,
+.fwt-input {
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  margin: 5px 2px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: 0.5s;
+}
+
+.fwt-select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.fwt-button:focus,
+.fwt-select:focus,
+.fwt-input:focus,
+.fwt-content:focus {
+  outline: 0;
+}
+
+.fwt-button:hover,
+.fwt-select:hover,
+.fwt-input:hover {
+  border: 1px solid #000000;
+  background-color: rgb(150, 140, 128);
+  cursor: pointer;
+}

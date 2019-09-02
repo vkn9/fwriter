@@ -94,11 +94,7 @@ export function initButton(obj) {
     insertImage,
     justifyLeft,
     justifyCenter,
-    justifyRight,
-    blockLevel,
-    fontName,
-    fontSize,
-    foreColor
+    justifyRight
   ];
   let objBtn = [];
   if (!obj || !obj.button || obj.button.length === 0) return buttonDefault;

@@ -1,14 +1,14 @@
 export const editor = {
   name: 'div',
   prop: {
-    attribute: [['class', 'fw-editor']]
+    attribute: [['class', 'fwt-editor']]
   }
 };
 
 export const MenuEditor = {
   name: 'div',
   prop: {
-    attribute: [['class', 'fw-menu']]
+    attribute: [['class', 'fwt-menu']]
   }
 };
 
@@ -112,7 +112,7 @@ export const contentEditor = {
 export const exportContent = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-export-content']],
+    attribute: [['id', 'fwt-export-content'], ['class', 'fwt-button']],
     content: '<i class="fas fa-save"></i>'
   }
 };

@@ -10,7 +10,7 @@ import {
   contentEditor,
   exportContent
 } from './enum/element';
-
+import './sass/menu_editor.scss';
 import './sass/content_editor.scss';
 
 window.fWrite = (seletor, obj) => {

@@ -39,7 +39,7 @@ export const fontSize = {
 export const bold = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['title', 'Strong'], ['class', 'fwt-button fwt-strong-button']],
     dataset: [['cmd', 'bold']],
     content: '<i class="fas fa-bold"></i>'
   }
@@ -48,7 +48,7 @@ export const bold = {
 export const underLine = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['class', 'fwt-button fwt-underline-button']],
     dataset: [['cmd', 'underline']],
     content: '<i class="fas fa-underline"></i>'
   }

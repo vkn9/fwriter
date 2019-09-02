@@ -143,6 +143,13 @@ export function execCommand(selector, obj) {
       switch (element[1]) {
         case 'button':
           el.addEventListener('click', () => {
+            const textSelect = window.getSelection().toString();
+            if (textSelect === '') return;
+            if (el.classList.contains('fwt-active-button')) {
+              el.classList.remove('fwt-active-button');
+            } else {
+              el.classList.add('fwt-active-button');
+            }
             const formatText = el.dataset.cmd;
             if (formatText === 'insertimage') {
               const image = prompt('image');

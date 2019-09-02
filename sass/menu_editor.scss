@@ -3,14 +3,16 @@
 }
 
 .fwt-menu {
+  background: #ecf0f1;
   display: flex;
   align-items: center;
-  border: 1px solid #000000;
+  border: 1px solid #d7e0e2;
 }
 
 .fwt-button,
 .fwt-select,
 .fwt-input {
+  background: #ecf0f1;
   border: none;
   padding: 5px 10px;
   font-size: 0.8em;
@@ -36,7 +38,10 @@
 .fwt-button:hover,
 .fwt-select:hover,
 .fwt-input:hover {
-  border: 1px solid #000000;
-  background-color: rgb(150, 140, 128);
+  background-color: #fff;
   cursor: pointer;
+}
+
+.fwt-active-button {
+  background-color: #fff;
 }

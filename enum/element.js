@@ -1,14 +1,53 @@
-export const editor = {
-  name: 'div',
+export const bold = {
+  name: 'button',
   prop: {
-    attribute: [['class', 'fwt-editor']]
+    attribute: [['title', 'Strong'], ['class', 'fwt-button fwt-strong-button']],
+    content: '<i class="fas fa-bold"></i>',
+    exec: 'bold'
   }
 };
 
-export const MenuEditor = {
-  name: 'div',
+export const underLine = {
+  name: 'button',
   prop: {
-    attribute: [['class', 'fwt-menu']]
+    attribute: [['class', 'fwt-button fwt-underline-button']],
+    content: '<i class="fas fa-underline"></i>',
+    exec: 'underline'
+  }
+};
+
+export const justifyLeft = {
+  name: 'button',
+  prop: {
+    attribute: [['class', 'fwt-button']],
+    content: '<i class="fas fa-align-left"></i>',
+    exec: 'justifyLeft'
+  }
+};
+
+export const justifyCenter = {
+  name: 'button',
+  prop: {
+    attribute: [['class', 'fwt-button']],
+    content: '<i class="fas fa-align-center"></i>',
+    exec: 'justifyCenter'
+  }
+};
+
+export const justifyRight = {
+  name: 'button',
+  prop: {
+    attribute: [['class', 'fwt-button']],
+    content: '<i class="fas fa-align-right"></i>',
+    exec: 'justifyRight'
+  }
+};
+
+export const insertImage = {
+  name: 'button',
+  prop: {
+    attribute: [['class', 'fwt-button']],
+    content: '<i class="fas fa-image"></i>'
   }
 };
 
@@ -36,60 +75,6 @@ export const fontSize = {
   }
 };
 
-export const bold = {
-  name: 'button',
-  prop: {
-    attribute: [['title', 'Strong'], ['class', 'fwt-button fwt-strong-button']],
-    dataset: [['cmd', 'bold']],
-    content: '<i class="fas fa-bold"></i>'
-  }
-};
-
-export const underLine = {
-  name: 'button',
-  prop: {
-    attribute: [['class', 'fwt-button fwt-underline-button']],
-    dataset: [['cmd', 'underline']],
-    content: '<i class="fas fa-underline"></i>'
-  }
-};
-
-export const insertImage = {
-  name: 'button',
-  prop: {
-    attribute: [['class', 'fwt-button']],
-    dataset: [['cmd', 'insertimage']],
-    content: '<i class="fas fa-image"></i>'
-  }
-};
-
-export const justifyLeft = {
-  name: 'button',
-  prop: {
-    attribute: [['class', 'fwt-button']],
-    dataset: [['cmd', 'justifyLeft']],
-    content: '<i class="fas fa-align-left"></i>'
-  }
-};
-
-export const justifyCenter = {
-  name: 'button',
-  prop: {
-    attribute: [['class', 'fwt-button']],
-    dataset: [['cmd', 'justifyCenter']],
-    content: '<i class="fas fa-align-center"></i>'
-  }
-};
-
-export const justifyRight = {
-  name: 'button',
-  prop: {
-    attribute: [['class', 'fwt-button']],
-    dataset: [['cmd', 'justifyRight']],
-    content: '<i class="fas fa-align-right"></i>'
-  }
-};
-
 export const foreColor = {
   name: 'input',
   prop: {
@@ -98,7 +83,7 @@ export const foreColor = {
   }
 };
 
-export const contentEditor = {
+export const content = {
   name: 'div',
   prop: {
     attribute: [
@@ -109,10 +94,16 @@ export const contentEditor = {
   }
 };
 
-export const exportContent = {
-  name: 'button',
+export const editor = {
+  name: 'div',
   prop: {
-    attribute: [['id', 'fwt-export-content'], ['class', 'fwt-button']],
-    content: '<i class="fas fa-save"></i>'
+    attribute: [['class', 'fwt-editor']]
+  }
+};
+
+export const menu = {
+  name: 'div',
+  prop: {
+    attribute: [['class', 'fwt-menu']]
   }
 };

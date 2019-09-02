@@ -1,18 +1,29 @@
-import {
-  bold,
-  underLine,
-  insertImage,
-  justifyLeft,
-  justifyCenter,
-  justifyRight,
-  foreColor
-} from './../enum/element';
-import { blockLevel } from './../modules/block_level';
-import { fontName } from './../modules/font_name';
-import { fontSize } from './../modules/font_size';
-function addProp(obj, element) {
-  Object.keys(obj).forEach(key => {
-    const objOfKey = obj[key];
+export function exec(command, value = null) {
+  document.execCommand(command, false, value);
+}
+
+function stateHandler(select, command) {
+  const check = document.queryCommandState(command);
+  if (check) {
+    select.classList['add']('fwt-active-button');
+  } else {
+    return select.classList['remove']('fwt-active-button');
+  }
+}
+
+function addEventListener(select1, type, select2, command, cb) {
+  if (command) {
+    return select1.addEventListener(type, () => stateHandler(select2, command));
+  }
+  return select1.addEventListener(type, e => cb(e));
+}
+
+function elementHandler(parent, obj) {
+  const content = document.querySelectorAll('.fwt-content')[0];
+  const element = document.createElement(obj.name);
+  const prop = obj.prop;
+  Object.keys(prop).forEach(key => {
+    const objOfKey = prop[key];
     switch (key) {
       case 'attribute':
         for (let i = 0; i < objOfKey.length; i++) {
@@ -27,150 +38,55 @@ function addProp(obj, element) {
         }
         break;
       case 'content':
-        element.innerHTML = obj[key];
+        element.innerHTML = prop[key];
+        break;
+      case 'exec':
+        const command = prop[key];
+        element.onclick = () => exec(command);
+        addEventListener(content, 'keyup', element, command);
+        addEventListener(content, 'mouseup', element, command);
+        addEventListener(element, 'click', element, command);
+        break;
+      case 'event':
+        const listEvent = prop[key];
+        for (let i = 0; i < listEvent.length; i++) {
+          const event = listEvent[i];
+          // event[1] = 1 => element
+          // event[1] = 0 => content
+          if (event[1]) {
+            addEventListener(element, event[0], null, null, e => event[2](e));
+          } else {
+            addEventListener(content, event[0], null, null, e => event[2](e));
+          }
+        }
     }
   });
+  parent.appendChild(element);
+  return element;
 }
 
-function createElement(parent, obj) {
-  if (!obj || !obj.name) return false;
-  const childElement = document.createElement(obj.name);
-  if (obj.prop) {
-    addProp(obj.prop, childElement);
-  }
-  parent.appendChild(childElement);
-  if (obj.child && obj.child.length > 0) {
-    for (let i = 0; i < obj.child.length; i++) {
-      const element = obj.child[i];
-      createChildElement(childElement, element);
-    }
-  }
-  return childElement;
-}
-
-export function createChildElement(parent, data) {
-  // Create many element
+export function createElement(parent, data) {
   if (Array.isArray(data)) {
     for (let i = 0; i < data.length; i++) {
       const element = data[i];
-      createElement(parent, element);
+      elementHandler(parent, element);
     }
+    return;
   }
-  // Create single element
-  return createElement(parent, data);
+  return elementHandler(parent, data);
 }
 
-export function detectSelector(selector) {
-  const firstChar = selector.charAt(0);
-  switch (firstChar) {
+export function getSelector(selector) {
+  const check = selector.charAt(0);
+  switch (check) {
     case '.':
       return document.getElementsByClassName(selector.substring(1))[0];
     case '#':
       return document.getElementById(selector.substring(1));
     default:
-      const onlyLowercase = /^[a-z]+$/;
-      if (onlyLowercase.test(firstChar)) {
+      const regex = /^[a-z]+$/;
+      if (regex.test(firstChar)) {
         return document.getElementsByTagName(selector)[0];
       }
   }
 }
-
-export function initChildElement(obj, count) {
-  if (!obj.child) obj.child = [];
-  for (let i = 0; i < count; i++) {
-    if (!obj.child[i]) obj.child[i] = {};
-    if (!obj.child[i].prop) obj.child[i].prop = {};
-
-    if (!obj.child[i].prop.attribute) obj.child[i].prop.attribute = [];
-    if (!obj.child[i].prop.dataset) obj.child[i].prop.dataset = [];
-  }
-  return obj;
-}
-
-export function initButton(obj) {
-  const buttonDefault = [
-    bold,
-    underLine,
-    insertImage,
-    justifyLeft,
-    justifyCenter,
-    justifyRight
-  ];
-  let objBtn = [];
-  if (!obj || !obj.button || obj.button.length === 0) return buttonDefault;
-  const listButton = obj.button;
-  for (let i = 0; i < listButton.length; i++) {
-    const element = listButton[i];
-    switch (element) {
-      case 'bold':
-        objBtn.push(bold);
-        break;
-      case 'underLine':
-        objBtn.push(underLine);
-        break;
-      case 'insertImage':
-        objBtn.push(insertImage);
-        break;
-      case 'justifyLeft':
-        objBtn.push(justifyLeft);
-        break;
-      case 'justifyCenter':
-        objBtn.push(justifyCenter);
-        break;
-      case 'justifyRight':
-        objBtn.push(justifyRight);
-        break;
-      case 'blockLevel':
-        objBtn.push(blockLevel);
-        break;
-      case 'fontName':
-        objBtn.push(fontName);
-        break;
-      case 'fontSize':
-        objBtn.push(fontSize);
-        break;
-    }
-  }
-  return objBtn;
-}
-
-export function execCommand(selector, obj) {
-  if (!obj || obj.length === 0) return false;
-  for (let i = 0; i < obj.length; i++) {
-    const element = obj[i];
-    const listTarget = selector.querySelectorAll(element[0]);
-    listTarget.forEach(el => {
-      switch (element[1]) {
-        case 'button':
-          el.addEventListener('click', () => {
-            const textSelect = window.getSelection().toString();
-            if (textSelect === '') return;
-            if (el.classList.contains('fwt-active-button')) {
-              el.classList.remove('fwt-active-button');
-            } else {
-              el.classList.add('fwt-active-button');
-            }
-            const formatText = el.dataset.cmd;
-            if (formatText === 'insertimage') {
-              const image = prompt('image');
-              document.execCommand(formatText, true, image);
-            } else {
-              document.execCommand(formatText, true);
-            }
-          });
-          break;
-        case 'select':
-          el.addEventListener('change', () => {
-            const value = el.options[el.selectedIndex].value;
-            document.execCommand(el.dataset.cmd, false, value);
-          });
-        case 'input':
-          el.addEventListener('change', () => {
-            document.execCommand(el.dataset.cmd, false, el.value);
-          });
-      }
-    });
-  }
-}
-
-export function execCommandSelect() {}

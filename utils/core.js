@@ -61,6 +61,7 @@ function elementHandler(parent, obj) {
         }
     }
   });
+  if (!parent) return element;
   parent.appendChild(element);
   return element;
 }

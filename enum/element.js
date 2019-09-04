@@ -19,7 +19,7 @@ export const underLine = {
 export const justifyLeft = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['title', 'Align Left'], ['class', 'fwt-button']],
     content: '<i class="fas fa-align-left"></i>',
     exec: 'justifyLeft'
   }
@@ -28,7 +28,7 @@ export const justifyLeft = {
 export const justifyCenter = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['title', 'Align Center'], ['class', 'fwt-button']],
     content: '<i class="fas fa-align-center"></i>',
     exec: 'justifyCenter'
   }
@@ -37,7 +37,7 @@ export const justifyCenter = {
 export const justifyRight = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['title', 'Align Right'], ['class', 'fwt-button']],
     content: '<i class="fas fa-align-right"></i>',
     exec: 'justifyRight'
   }
@@ -46,7 +46,7 @@ export const justifyRight = {
 export const insertImage = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button']],
+    attribute: [['title', 'Picture'], ['class', 'fwt-button']],
     content: '<i class="fas fa-image"></i>'
   }
 };
@@ -86,7 +86,11 @@ export const foreColor = {
 export const content = {
   name: 'div',
   prop: {
-    attribute: [['class', 'fwt-content'], ['contenteditable', true], ['spellcheck', false]]
+    attribute: [
+      ['class', 'fwt-content'],
+      ['contenteditable', true],
+      ['spellcheck', false]
+    ]
   }
 };
 

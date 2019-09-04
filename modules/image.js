@@ -1,29 +1,76 @@
 import { insertImage } from './../enum/element';
 import { createElement } from './../utils/core';
-let selectCurrent = null;
+import { Modal } from './../modules/modal';
+import './../sass/modal.scss';
+let sel;
 function dd() {
-  let range;
   if (window.getSelection && window.getSelection().getRangeAt) {
-    range = window.getSelection().getRangeAt(0);
-    selectCurrent = range;
+    sel = window.getSelection();
   }
 }
-function handler(e) {
-  console.log(selectCurrent);
-  const image = prompt('image');
-  return document.execCommand(
-    'insertImage',
-    false,
-    'https://kenh14cdn.com/thumb_w/620/2019/9/4/goo-hye-sun-ahn-jae-hyun-1567411597981712284395-1567567724940533410690.jpg'
-  );
-  const images = {
-    name: 'img',
-    prop: {
-      attribute: [['src', image]]
+function handler() {
+  // instanciate new modal
+  var modal = new Modal({
+    footer: true,
+    stickyFooter: false,
+    closeMethods: ['overlay', 'button', 'escape'],
+    closeLabel: 'Close',
+    cssClass: ['custom-class-1', 'custom-class-2'],
+    onOpen: function() {
+      console.log('modal open');
+    },
+    onClose: function() {
+      console.log('modal closed');
+    },
+    beforeClose: function() {
+      // here's goes some logic
+      // e.g. save content before closing the modal
+      return true; // close the modal
+      return false; // nothing happens
     }
-  };
-  const ig = createElement(document.body, images);
-  selectCurrent.insertNode(ig);
+  });
+
+  // set content
+  modal.setContent("<h1>here's some content</h1>");
+
+  // add a button
+  modal.addFooterBtn('Nhập', 'tingle-btn tingle-btn--primary', function() {
+    alert('ok');
+    // here goes some logic
+    modal.close();
+  });
+
+  // add another button
+  modal.addFooterBtn(
+    'Dangerous action !',
+    'tingle-btn tingle-btn--danger',
+    function() {
+      // here goes some logic
+      modal.close();
+    }
+  );
+
+  // open modal
+  modal.open();
+
+  // -------------------------------
+
+  // const image = prompt('image');
+  // const images = {
+  //   name: 'img',
+  //   prop: {
+  //     attribute: [['src', image]]
+  //   }
+  // };
+  // const ig = createElement(document.body, images);
+  // if (sel.getRangeAt && sel.rangeCount) {
+  //   const range = sel.getRangeAt(0);
+  //   // create virtual node
+  //   const frag = document.createDocumentFragment();
+  //   frag.appendChild(ig);
+  //   // insert to range
+  //   range.insertNode(frag);
+  // }
 }
 
 function imageSelectHandler(e) {

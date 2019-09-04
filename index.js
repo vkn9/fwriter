@@ -1,4 +1,5 @@
 import { createElement, getSelector } from './utils/core';
+import { tlite } from './modules/tooltip';
 import {
   bold,
   underLine,
@@ -15,7 +16,8 @@ import { insertImage } from './modules/image';
 
 import './sass/menu_editor.scss';
 import './sass/content_editor.scss';
-
+document.execCommand('defaultParagraphSeparator', false, 'p');
+import './sass/tooltip.scss';
 window.fWrite = (seletor, obj) => {
   const inject = getSelector(seletor);
   const createEditor = createElement(inject, editor);
@@ -29,4 +31,5 @@ window.fWrite = (seletor, obj) => {
     justifyRight,
     insertImage
   ]);
+  tlite(el => el.classList.contains('fwt-button'));
 };

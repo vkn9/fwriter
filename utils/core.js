@@ -13,7 +13,21 @@ function stateHandler(select, command) {
 
 function addEventListener(select1, type, select2, command, cb) {
   if (command) {
+    if (Array.isArray(type)) {
+      for (let i = 0; i < type.length; i++) {
+        const element = type[i];
+        select1.addEventListener(element, () => stateHandler(select2, command));
+      }
+      return;
+    }
     return select1.addEventListener(type, () => stateHandler(select2, command));
+  }
+  if (Array.isArray(type)) {
+    for (let i = 0; i < type.length; i++) {
+      const element = type[i];
+      select1.addEventListener(element, e => cb(e));
+    }
+    return;
   }
   return select1.addEventListener(type, e => cb(e));
 }

@@ -9,11 +9,11 @@
   border: 1px solid #d7e0e2;
 }
 
-.fwt-button,
-.fwt-select,
-.fwt-input {
+.fwt-button {
+  position: relative;
   background: #ecf0f1;
   border: none;
+  flex: 1;
   padding: 5px 10px;
   font-size: 0.8em;
   margin: 5px 2px;
@@ -29,19 +29,11 @@
 }
 
 .fwt-button:focus,
-.fwt-select:focus,
-.fwt-input:focus,
 .fwt-content:focus {
   outline: 0;
 }
 
-.fwt-button:hover,
-.fwt-select:hover,
-.fwt-input:hover {
+.fwt-button:hover, .fwt-active-button{
   background-color: #fff;
   cursor: pointer;
-}
-
-.fwt-active-button {
-  background-color: #fff;
 }

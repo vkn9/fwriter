@@ -1,7 +1,7 @@
 export const bold = {
   name: 'button',
   prop: {
-    attribute: [['title', 'Strong'], ['class', 'fwt-button fwt-strong-button']],
+    attribute: [['title', 'Bold (⌘+B)'], ['class', 'fwt-button']],
     content: '<i class="fas fa-bold"></i>',
     exec: 'bold'
   }
@@ -10,7 +10,7 @@ export const bold = {
 export const underLine = {
   name: 'button',
   prop: {
-    attribute: [['class', 'fwt-button fwt-underline-button']],
+    attribute: [['title', 'Underline (⌘+U)'], ['class', 'fwt-button']],
     content: '<i class="fas fa-underline"></i>',
     exec: 'underline'
   }
@@ -86,11 +86,7 @@ export const foreColor = {
 export const content = {
   name: 'div',
   prop: {
-    attribute: [
-      ['class', 'fwt-content'],
-      ['contenteditable', true],
-      ['spellcheck', false]
-    ]
+    attribute: [['class', 'fwt-content'], ['contenteditable', true], ['spellcheck', false]]
   }
 };
 

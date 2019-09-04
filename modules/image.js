@@ -1,9 +1,8 @@
 import { insertImage } from './../enum/element';
 import { createElement } from './../utils/core';
 import { Modal } from './../modules/modal';
-import './../sass/modal.scss';
 let sel;
-function dd() {
+function getCursor() {
   if (window.getSelection && window.getSelection().getRangeAt) {
     sel = window.getSelection();
   }
@@ -87,7 +86,7 @@ function imageSelectHandler(e) {
 insertImage.prop.event = [
   ['click', 1, handler],
   ['click', 0, imageSelectHandler],
-  ['mouseup', 0, dd]
+  ['mouseup', 0, getCursor]
 ];
 
 export { insertImage };

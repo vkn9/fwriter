@@ -17,7 +17,6 @@ import { insertImage } from './modules/image';
 import './sass/menu_editor.scss';
 import './sass/content_editor.scss';
 document.execCommand('defaultParagraphSeparator', false, 'p');
-import './sass/tooltip.scss';
 window.fWrite = (seletor, obj) => {
   const inject = getSelector(seletor);
   const createEditor = createElement(inject, editor);

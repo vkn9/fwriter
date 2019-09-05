@@ -1,3 +1,5 @@
+import { tlite } from './../modules/tooltip';
+
 export function exec(command, value = null) {
   document.execCommand(command, false, value);
 }
@@ -11,7 +13,7 @@ function stateHandler(select, command) {
   }
 }
 
-function addEventListener(select1, type, select2, command, cb) {
+export function addEventListener(select1, type, select2, command, callback) {
   if (command) {
     if (Array.isArray(type)) {
       for (let i = 0; i < type.length; i++) {
@@ -25,11 +27,11 @@ function addEventListener(select1, type, select2, command, cb) {
   if (Array.isArray(type)) {
     for (let i = 0; i < type.length; i++) {
       const element = type[i];
-      select1.addEventListener(element, e => cb(e));
+      select1.addEventListener(element, e => callback(e));
     }
     return;
   }
-  return select1.addEventListener(type, e => cb(e));
+  return select1.addEventListener(type, e => callback(e));
 }
 
 function elementHandler(parent, obj) {
@@ -82,11 +84,12 @@ function elementHandler(parent, obj) {
 
 export function createElement(parent, data) {
   if (Array.isArray(data)) {
+    let listElement = [];
     for (let i = 0; i < data.length; i++) {
       const element = data[i];
-      elementHandler(parent, element);
+      listElement.push(elementHandler(parent, element));
     }
-    return;
+    return listElement;
   }
   return elementHandler(parent, data);
 }
@@ -104,4 +107,9 @@ export function getSelector(selector) {
         return document.getElementsByTagName(selector)[0];
       }
   }
+}
+
+export function init() {
+  tlite(el => el.classList.contains('fwt-button'));
+  document.execCommand('defaultParagraphSeparator', false, 'p');
 }

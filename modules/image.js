@@ -8,49 +8,37 @@ function getCursor() {
   }
 }
 function handler() {
-  // instanciate new modal
-  var modal = new Modal({
-    footer: true,
-    stickyFooter: false,
-    closeMethods: ['overlay', 'button', 'escape'],
-    closeLabel: 'Close',
-    cssClass: ['custom-class-1', 'custom-class-2'],
-    onOpen: function() {
-      console.log('modal open');
-    },
-    onClose: function() {
-      console.log('modal closed');
-    },
-    beforeClose: function() {
-      // here's goes some logic
-      // e.g. save content before closing the modal
-      return true; // close the modal
-      return false; // nothing happens
+  const modal = new Modal();
+  const ab = {
+    name: 'p',
+    prop: {
+      content: 'Hahahahaha'
     }
-  });
-
-  // set content
-  modal.setContent("<h1>here's some content</h1>");
-
-  // add a button
-  modal.addFooterBtn('Nhập', 'tingle-btn tingle-btn--primary', function() {
-    alert('ok');
-    // here goes some logic
-    modal.close();
-  });
-
-  // add another button
-  modal.addFooterBtn(
-    'Dangerous action !',
-    'tingle-btn tingle-btn--danger',
-    function() {
-      // here goes some logic
-      modal.close();
+  };
+  const ab1 = {
+    name: 'div',
+    prop: {
+      content: 'qweqweqw'
     }
-  );
+  };
+  const ab2 = {
+    name: 'input',
+    prop: {
+      attribute: [['type', 'text'], ['class', 'fwt-image']]
+    }
+  };
 
-  // open modal
-  modal.open();
+  const footer = {
+    name: 'button',
+    prop: {
+      content: 'Ok',
+      event: [['click', 1, () => modal.closeModal()]]
+    }
+  };
+  const aba = createElement(null, [ab, ab1, ab2, footer]);
+
+  modal.setContent(aba);
+  modal.openModal();
 
   // -------------------------------
 

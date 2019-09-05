@@ -1,5 +1,5 @@
-import { createElement, getSelector } from './utils/core';
-import { tlite } from './modules/tooltip';
+import { createElement, getSelector, init } from './utils/core';
+
 import {
   bold,
   underLine,
@@ -16,8 +16,9 @@ import { insertImage } from './modules/image';
 
 import './sass/menu_editor.scss';
 import './sass/content_editor.scss';
-document.execCommand('defaultParagraphSeparator', false, 'p');
+
 window.fWrite = (seletor, obj) => {
+  init();
   const inject = getSelector(seletor);
   const createEditor = createElement(inject, editor);
   const createMenu = createElement(createEditor, menu);
@@ -30,5 +31,4 @@ window.fWrite = (seletor, obj) => {
     justifyRight,
     insertImage
   ]);
-  tlite(el => el.classList.contains('fwt-button'));
 };

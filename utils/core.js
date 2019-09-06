@@ -104,6 +104,9 @@ function elementHandler(parent, obj) {
   });
   if (!parent) return element;
   parent.appendChild(element);
+  if (obj.child) {
+    createElement(element, obj.child);
+  }
   return element;
 }
 

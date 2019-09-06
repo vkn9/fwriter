@@ -5,12 +5,12 @@ import {
   justifyLeft,
   justifyCenter,
   justifyRight,
-  foreColor,
   editor,
   menu,
   content
 } from './enum/element';
 import { insertImage } from './modules/image';
+import { fontName } from './modules/font_name';
 
 import './sass/menu_editor.scss';
 import './sass/content_editor.scss';
@@ -28,7 +28,8 @@ class fWrite {
       justifyLeft,
       justifyCenter,
       justifyRight,
-      insertImage
+      insertImage,
+      fontName
     ]);
   }
 

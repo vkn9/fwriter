@@ -1,5 +1,9 @@
 import { insertImage } from './../enum/element';
-import { createElement, saveSelection, restoreSelection } from './../utils/core';
+import {
+  createElement,
+  saveSelection,
+  restoreSelection
+} from './../utils/core';
 import { Modal } from './../modules/modal';
 let selectionRange;
 function getCursor() {
@@ -7,6 +11,7 @@ function getCursor() {
 }
 
 function insertImageFunc() {
+  if (!selectionRange) return;
   selectionRange = restoreSelection(selectionRange);
   const image = document.getElementsByClassName('fwt-image')[0].value;
   const images = {
@@ -51,9 +56,8 @@ function handler() {
       event: [['click', 1, () => modal.closeModal(insertImageFunc)]]
     }
   };
-  const aba = createElement(null, [ab, ab1, ab2, footer]);
 
-  modal.setContent(aba);
+  modal.setContent([ab, ab1, ab2, footer]);
   modal.openModal();
 }
 

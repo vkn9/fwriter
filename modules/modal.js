@@ -2,7 +2,9 @@ import { createElement } from './../utils/core';
 import './../sass/modal.scss';
 
 function hideModal(modal, element) {
-  document.body.removeChild(document.body.children[document.body.children.length - 1]);
+  document.body.removeChild(
+    document.body.children[document.body.children.length - 1]
+  );
   modal.classList.remove('show-modal');
 }
 
@@ -31,14 +33,7 @@ class Modal {
   }
 
   setContent(content) {
-    if (Array.isArray(content)) {
-      for (let i = 0; i < content.length; i++) {
-        const element = content[i];
-        this.wrap.appendChild(element);
-      }
-      return;
-    }
-    return this.wrap.appendChild(content);
+    return createElement(this.wrap, content);
   }
 
   openModal() {

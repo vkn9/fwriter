@@ -1,3 +1,4 @@
+// Button
 export const bold = {
   name: 'div',
   prop: {
@@ -119,10 +120,16 @@ export const foreColor = {
   }
 };
 
+// Wrap Editor
+
 export const content = {
   name: 'div',
   prop: {
-    attribute: [['class', 'fwt-content'], ['contenteditable', true], ['spellcheck', false]]
+    attribute: [
+      ['class', 'fwt-content'],
+      ['contenteditable', true],
+      ['spellcheck', false]
+    ]
   }
 };
 

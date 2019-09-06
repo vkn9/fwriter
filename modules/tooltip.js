@@ -28,6 +28,8 @@ tlite.show = function(el, opts, isAuto) {
     el.addEventListener('mouseleave', autoHide);
 
     function show() {
+      const sel = document.getElementsByClassName('fwt-button-menu')[0];
+      if (sel && window.getComputedStyle(sel).display !== 'none') return;
       text = el.title || el.getAttribute(fallbackAttrib) || text;
       el.title = '';
       el.setAttribute(fallbackAttrib, '');

@@ -22,7 +22,15 @@ class fWrite {
     const createEditor = createElement(inject, editor);
     const createMenu = createElement(createEditor, menu);
     createElement(createEditor, content);
-    createElement(createMenu, [insertImage, fontName]);
+    createElement(createMenu, [
+      bold,
+      underLine,
+      justifyLeft,
+      justifyCenter,
+      justifyRight,
+      insertImage,
+      fontName
+    ]);
   }
 
   save() {

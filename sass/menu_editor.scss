@@ -39,3 +39,33 @@
   background-color: #fff;
   cursor: pointer;
 }
+
+.fwt-dropdown {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
+}
+
+.fwt-dropdown .fwt-button-menu {
+  list-style-type: none;
+  display: none;
+  z-index: 1;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  padding-left: 0px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.fwt-dropdown .fwt-button-menu li {
+  background-color: #ecf0f1;
+  padding: 5px;
+}
+
+.fwt-dropdown:hover > .fwt-button-menu > li:hover {
+  background-color: #abcdef;
+}

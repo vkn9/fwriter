@@ -91,7 +91,20 @@ export const blockLevel = {
 export const fontName = {
   name: 'div',
   prop: {
-    attribute: [['class', 'fwt-button'], ['title', 'Font Name']]
+    attribute: [['class', 'fwt-button fwt-dropdown'], ['title', 'Font Name']],
+    event: [
+      [
+        'click',
+        1,
+        () => {
+          const sel = document.getElementsByClassName('fwt-button-menu')[0];
+          if (window.getComputedStyle(sel).display === 'none') {
+            return (sel.style.display = 'flex');
+          }
+          return (sel.style.display = 'none');
+        }
+      ]
+    ]
   }
 };
 

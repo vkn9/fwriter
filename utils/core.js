@@ -63,45 +63,48 @@ function elementHandler(parent, obj) {
   const content = document.querySelectorAll('.fwt-content')[0];
   const element = document.createElement(obj.name);
   const prop = obj.prop;
-  Object.keys(prop).forEach(key => {
-    const objOfKey = prop[key];
-    switch (key) {
-      case 'attribute':
-        for (let i = 0; i < objOfKey.length; i++) {
-          const valueAttr = objOfKey[i];
-          element.setAttribute(valueAttr[0], valueAttr[1]);
-        }
-        break;
-      case 'dataset':
-        for (let i = 0; i < objOfKey.length; i++) {
-          const valueAttr = objOfKey[i];
-          element.dataset[valueAttr[0]] = valueAttr[1];
-        }
-        break;
-      case 'content':
-        element.innerHTML = prop[key];
-        break;
-      case 'exec':
-        const command = prop[key];
-        element.onclick = () => exec(command);
-        addEventListener(content, 'keyup', element, command);
-        addEventListener(content, 'mouseup', element, command);
-        addEventListener(element, 'click', element, command);
-        break;
-      case 'event':
-        const listEvent = prop[key];
-        for (let i = 0; i < listEvent.length; i++) {
-          const event = listEvent[i];
-          // event[1] = 1 => element
-          // event[1] = 0 => content
-          if (event[1]) {
-            addEventListener(element, event[0], null, null, e => event[2](e));
-          } else {
-            addEventListener(content, event[0], null, null, e => event[2](e));
+  if (prop) {
+    Object.keys(prop).forEach(key => {
+      const objOfKey = prop[key];
+      switch (key) {
+        case 'attribute':
+          for (let i = 0; i < objOfKey.length; i++) {
+            const valueAttr = objOfKey[i];
+            element.setAttribute(valueAttr[0], valueAttr[1]);
           }
-        }
-    }
-  });
+          break;
+        case 'dataset':
+          for (let i = 0; i < objOfKey.length; i++) {
+            const valueAttr = objOfKey[i];
+            element.dataset[valueAttr[0]] = valueAttr[1];
+          }
+          break;
+        case 'content':
+          element.innerHTML = prop[key];
+          break;
+        case 'exec':
+          const command = prop[key];
+          element.onclick = () => exec(command);
+          addEventListener(content, 'keyup', element, command);
+          addEventListener(content, 'mouseup', element, command);
+          addEventListener(element, 'click', element, command);
+          break;
+        case 'event':
+          const listEvent = prop[key];
+          for (let i = 0; i < listEvent.length; i++) {
+            const event = listEvent[i];
+            // event[1] = 1 => element
+            // event[1] = 0 => content
+            if (event[1]) {
+              addEventListener(element, event[0], null, null, e => event[2](e));
+            } else {
+              addEventListener(content, event[0], null, null, e => event[2](e));
+            }
+          }
+      }
+    });
+  }
+
   if (!parent) return element;
   parent.appendChild(element);
   if (obj.child) {

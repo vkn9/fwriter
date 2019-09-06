@@ -1,12 +1,28 @@
 import { insertImage } from './../enum/element';
-import { createElement } from './../utils/core';
+import { createElement, saveSelection, restoreSelection } from './../utils/core';
 import { Modal } from './../modules/modal';
-let sel;
+let selectionRange;
 function getCursor() {
-  if (window.getSelection && window.getSelection().getRangeAt) {
-    sel = window.getSelection();
-  }
+  selectionRange = saveSelection();
 }
+
+function insertImageFunc() {
+  selectionRange = restoreSelection(selectionRange);
+  const image = document.getElementsByClassName('fwt-image')[0].value;
+  const images = {
+    name: 'img',
+    prop: {
+      attribute: [['src', image]]
+    }
+  };
+  const ig = createElement(document.body, images);
+  // create virtual node
+  const frag = document.createDocumentFragment();
+  frag.appendChild(ig);
+  // insert to range
+  selectionRange.insertNode(frag);
+}
+
 function handler() {
   const modal = new Modal();
   const ab = {
@@ -32,32 +48,13 @@ function handler() {
     name: 'button',
     prop: {
       content: 'Ok',
-      event: [['click', 1, () => modal.closeModal()]]
+      event: [['click', 1, () => modal.closeModal(insertImageFunc)]]
     }
   };
   const aba = createElement(null, [ab, ab1, ab2, footer]);
 
   modal.setContent(aba);
   modal.openModal();
-
-  // -------------------------------
-
-  // const image = prompt('image');
-  // const images = {
-  //   name: 'img',
-  //   prop: {
-  //     attribute: [['src', image]]
-  //   }
-  // };
-  // const ig = createElement(document.body, images);
-  // if (sel.getRangeAt && sel.rangeCount) {
-  //   const range = sel.getRangeAt(0);
-  //   // create virtual node
-  //   const frag = document.createDocumentFragment();
-  //   frag.appendChild(ig);
-  //   // insert to range
-  //   range.insertNode(frag);
-  // }
 }
 
 function imageSelectHandler(e) {

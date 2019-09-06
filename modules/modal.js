@@ -2,9 +2,7 @@ import { createElement } from './../utils/core';
 import './../sass/modal.scss';
 
 function hideModal(modal, element) {
-  document.body.removeChild(
-    document.body.children[document.body.children.length - 1]
-  );
+  document.body.removeChild(document.body.children[document.body.children.length - 1]);
   modal.classList.remove('show-modal');
 }
 
@@ -48,8 +46,8 @@ class Modal {
   }
 
   closeModal(callback) {
-    hideModal(this.modal);
     if (typeof callback === 'function') callback();
+    hideModal(this.modal);
   }
 }
 

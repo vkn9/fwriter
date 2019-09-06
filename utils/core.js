@@ -1,5 +1,30 @@
 import { tlite } from './../modules/tooltip';
 
+export function saveSelection() {
+  if (window.getSelection) {
+    const sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      return sel.getRangeAt(0);
+    }
+  } else if (document.selection && document.selection.createRange) {
+    return document.selection.createRange();
+  }
+  return null;
+}
+
+export function restoreSelection(range) {
+  if (range) {
+    if (window.getSelection) {
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      return range;
+    } else if (document.selection && range.select) {
+      return range.select();
+    }
+  }
+}
+
 export function exec(command, value = null) {
   document.execCommand(command, false, value);
 }

@@ -18,10 +18,15 @@
   </head>
   <body>
     <div id="editor"></div>
+    <button id="btn-save">Save</button>
     <script src="dist/bundle.js"></script>
     <script>
-      fWrite('#editor', {
+      const editor = new fWrite('#editor', {
         button: []
+      });
+      document.getElementById('btn-save').addEventListener('click', () => {
+        const content = editor.save();
+        console.log(content);
       });
     </script>
   </body>

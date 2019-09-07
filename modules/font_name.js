@@ -1,12 +1,31 @@
-import { fontName } from './../enum/element';
 import { listFont } from './../enum/core';
 import { exec } from './../utils/core';
+const fontName = {
+  name: 'div',
+  prop: {
+    attribute: [['class', 'fwt-button fwt-dropdown'], ['title', 'Font Name']],
+    event: [
+      [
+        'click',
+        1,
+        () => {
+          const sel = document.getElementsByClassName('fwt-button-menu')[0];
+          if (window.getComputedStyle(sel).display === 'none') {
+            return (sel.style.display = 'flex');
+          }
+          return (sel.style.display = 'none');
+        }
+      ]
+    ]
+  }
+};
+
 fontName.child = [
   {
     name: 'span',
     prop: {
       attribute: [['class', 'fwt-fontname-current']],
-      content: 'Arial'
+      content: listFont[0]
     }
   },
   {
@@ -29,9 +48,7 @@ for (let i = 0; i < listFont.length; i++) {
           'click',
           1,
           () => {
-            const sel = document.getElementsByClassName(
-              'fwt-fontname-current'
-            )[0];
+            const sel = document.getElementsByClassName('fwt-fontname-current')[0];
             if (sel) {
               sel.innerHTML = font;
               exec('fontName', font);
